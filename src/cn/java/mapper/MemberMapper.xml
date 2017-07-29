@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.java.mapper.MemberMapper" >
+  <resultMap id="BaseResultMap" type="cn.java.entity.Member" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="m_id" property="mId" jdbcType="INTEGER" />
+    <result column="m_name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_gender" property="mGender" jdbcType="VARCHAR" />
+    <result column="m_age" property="mAge" jdbcType="INTEGER" />
+    <result column="m_address" property="mAddress" jdbcType="VARCHAR" />
+    <result column="m_email" property="mEmail" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, m_id, m_name, m_gender, m_age, m_address, m_email
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from member_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from member_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="cn.java.entity.Member" >
+    insert into member_info (id, m_id, m_name, 
+      m_gender, m_age, m_address, 
+      m_email)
+    values (#{id,jdbcType=BIGINT}, #{mId,jdbcType=INTEGER}, #{mName,jdbcType=VARCHAR}, 
+      #{mGender,jdbcType=VARCHAR}, #{mAge,jdbcType=INTEGER}, #{mAddress,jdbcType=VARCHAR}, 
+      #{mEmail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.java.entity.Member" >
+    insert into member_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mId != null" >
+        m_id,
+      </if>
+      <if test="mName != null" >
+        m_name,
+      </if>
+      <if test="mGender != null" >
+        m_gender,
+      </if>
+      <if test="mAge != null" >
+        m_age,
+      </if>
+      <if test="mAddress != null" >
+        m_address,
+      </if>
+      <if test="mEmail != null" >
+        m_email,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mId != null" >
+        #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null" >
+        #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mGender != null" >
+        #{mGender,jdbcType=VARCHAR},
+      </if>
+      <if test="mAge != null" >
+        #{mAge,jdbcType=INTEGER},
+      </if>
+      <if test="mAddress != null" >
+        #{mAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mEmail != null" >
+        #{mEmail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.java.entity.Member" >
+    update member_info
+    <set >
+      <if test="mId != null" >
+        m_id = #{mId,jdbcType=INTEGER},
+      </if>
+      <if test="mName != null" >
+        m_name = #{mName,jdbcType=VARCHAR},
+      </if>
+      <if test="mGender != null" >
+        m_gender = #{mGender,jdbcType=VARCHAR},
+      </if>
+      <if test="mAge != null" >
+        m_age = #{mAge,jdbcType=INTEGER},
+      </if>
+      <if test="mAddress != null" >
+        m_address = #{mAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mEmail != null" >
+        m_email = #{mEmail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.java.entity.Member" >
+    update member_info
+    set m_id = #{mId,jdbcType=INTEGER},
+      m_name = #{mName,jdbcType=VARCHAR},
+      m_gender = #{mGender,jdbcType=VARCHAR},
+      m_age = #{mAge,jdbcType=INTEGER},
+      m_address = #{mAddress,jdbcType=VARCHAR},
+      m_email = #{mEmail,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="List">
+     SELECT * FROM member_info
+  </select>
+</mapper>
